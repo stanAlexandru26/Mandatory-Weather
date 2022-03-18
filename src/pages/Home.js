@@ -11,7 +11,6 @@ import ForecastWeatherCard from '../components/ForecastWeatherCard';
 export default function Home() {
   const [search, setSearch] = useState('Barcelona');
   const [browserCoordonates, setBrowserCoordonates] = useState({});
-
   const [showWeatherGraph, setShowWeatherGraph] = useState(false);
 
   let truePosition = useActualPosition(search, browserCoordonates);
@@ -41,30 +40,32 @@ export default function Home() {
   };
 
   return (
-    <main className="mx-auto w-5/6 md:w-full xl:max-w-6xl 2xl:max-w-7xl ">
+    <main className="mx-auto w-5/6 md:w-full lg:max-w-7xl xl:max-w-7xl 2xl:max-w-7xl ">
       <Search
         setSearch={setSearch}
         getLocalWeather={getLocalWeather}
         setBrowserCoordonates={setBrowserCoordonates}
       />
 
-      <div className=" m-auto my-4 h-auto w-full  overflow-hidden rounded-lg shadow-lg md:w-3/5 lg:w-1/2">
-        {current && (
-          <BasicWeatherCard
-            data={current}
-            showWeatherGraph={showWeatherGraph}
-            setShowWeatherGraph={setShowWeatherGraph}
-          />
-        )}
-        {chartData && (
-          <div className=" mt-5 p-5 bg-primary  drop-shadow-lg rounded-xl ">
-            {daily.slice(1).map((item, index) => (
-              <ForecastWeatherCard key={index} data={item} />
-            ))}
-          </div>
-        )}
+      <div className=" m-auto my-5 h-auto rounded-lg md:w-3/5 lg:w-10/12">
+        <div className="lg:flex gap-2">
+          {current && (
+            <BasicWeatherCard
+              data={current}
+              showWeatherGraph={showWeatherGraph}
+              setShowWeatherGraph={setShowWeatherGraph}
+            />
+          )}
+          {chartData && (
+            <div className=" mx-auto lg:flex mt-5 lg:mt-0 p-5 bg-primary drop-shadow-lg rounded-xl justify-between ">
+              {daily.slice(1).map((item, index) => (
+                <ForecastWeatherCard key={index} data={item} />
+              ))}
+            </div>
+          )}
+        </div>
         {showWeatherGraph && (
-          <div className="m-auto mt-5 bg-primary p-5 rounded-xl drop-shadow-lg  ">
+          <div className="mx-auto mt-5 bg-primary p-2 rounded-xl drop-shadow-lg  ">
             <WeatherGraph data={chartData} />
           </div>
         )}

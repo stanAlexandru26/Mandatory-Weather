@@ -12,15 +12,19 @@ import {
   WiDayThunderstorm,
   WiMoonAltNew,
 } from 'react-icons/wi';
+
 export default function ForecastWeatherCard({ data }) {
   return (
-    <div className=" border-b-2 last:border-b-0 p-2 ">
-      <div className="flex gap-6 items-center ">
-        <h1 className="flex-1 text-left">
-          {moment.unix(data.time).format('dddd')}
+    <div className="border-b-2 last:border-0 p-2  lg:mx-auto   lg:border-r-2 lg:border-b-0  ">
+      <div className=" flex flex-row  h-full w-full lg:flex-col justify-evenly ">
+        <h1 className=" basis-1/3 flex justify-center items-center ">
+          {moment.unix(data.time).utc().format('dddd')}
         </h1>
-        <div className="text-4xl">{getWeatherIcon(data.weather_icon)}</div>
-        <h1 className="flex-1 text-right">
+        <div className="text-3xl basis-1/3 lg:text-5xl flex justify-center items-center  ">
+          {getWeatherIcon(data.weather_icon)}
+        </div>
+
+        <h1 className="  basis-1/3 flex justify-center items-center ">
           {data.temp_min}° / {data.temp_max}°
         </h1>
       </div>

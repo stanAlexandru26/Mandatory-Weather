@@ -5,19 +5,19 @@ import logo from '../assets/MandatoryWeather-logos_transparent.png';
 
 export default function Navbar() {
   return (
-    <nav className="bg-primary text-primary drop-shadow-lg rounded-b-lg px-20 max-h-32 py-1">
+    <nav className="bg-primary text-primary drop-shadow-lg rounded-b-lg px-10  max-h-32 py-1 antialiased">
       <div className="flex items-center justify-between ">
         <div className=" ">
           <Link to="/">
-            <img src={logo} alt="logo" className=" max-h-12 p-1 " />
+            <img src={logo} alt="logo" className=" max-h-12  p-1 " />
           </Link>
         </div>
-        <div className="flex justify-between gap-5">
+        <div className="flex justify-between gap-5 ">
           <Link to="/about">About</Link>
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/stanAlexandru26/Mandatory-Weather"
+            href="https://github.com/stanAlexandru26"
             className="text-gray-400 transition-colors duration-200 hover:text-gray-500"
           >
             <span className="sr-only">Mandatory Weather on GitHub</span>

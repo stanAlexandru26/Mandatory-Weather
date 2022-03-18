@@ -10,9 +10,6 @@ export default function useOneCall(position, units) {
     type: 'region',
   });
 
-  function format_time(time) {
-    return new Date(time * 1e3).toISOString().slice(-13, -5);
-  }
   const capitalize = (str) => {
     return str.replace(/\w\S*/g, function (txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -33,7 +30,7 @@ export default function useOneCall(position, units) {
           time: moment
             .unix(response.data.timezone_offset + response.data.current.dt)
             .utc()
-            .format('dddd HH:mm a'),
+            .format('dddd h:mm a'),
           temp: Math.round(response.data.current.temp),
           feels_like: Math.round(response.data.current.feels_like),
           humidity: response.data.current.humidity,
@@ -45,8 +42,14 @@ export default function useOneCall(position, units) {
             response.data.current.weather[0].description,
           ),
           weather_icon: response.data.current.weather[0].icon,
-          sunSet: format_time(response.data.current.sunset),
-          sunRise: format_time(response.data.current.sunrise),
+          sunSet: moment
+            .unix(response.data.current.sunset)
+            .utc()
+            .format('h:mm a'),
+          sunRise: moment
+            .unix(response.data.current.sunrise)
+            .utc()
+            .format('h:mm a'),
         },
         hourly: response.data.hourly.map((hour) => {
           return {
@@ -77,18 +80,23 @@ export default function useOneCall(position, units) {
         chartData: {
           hourlyChartData: response.data.hourly.map((hour) => {
             return {
-              time: moment.unix(hour.dt).utc().format('ddd hh:mm a'),
+              xAxis: moment.unix(hour.dt).utc().format('dddd '),
+              time: moment.unix(hour.dt).utc().format('dddd, h:mm a'),
               weather_description: capitalize(hour.weather[0].description),
               temp: Math.round(hour.temp),
+              weather_icon: hour.weather[0].icon,
             };
           }),
           dailyChartData: response.data.daily.map((day) => {
             return {
-              time: moment.unix(day.dt).utc().format('ddd'),
+              xAxis: moment.unix(day.dt).utc().format('dddd'),
+              time: moment.unix(day.dt).utc().format('dddd, h a'),
               temp_min: Math.round(day.temp.min),
               temp_max: Math.round(day.temp.max),
               temp: Math.round(day.temp.day),
+              rainProbability: (day.pop * 100).toFixed(0),
               weather_description: capitalize(day.weather[0].description),
+              weather_icon: day.weather[0].icon,
             };
           }),
         },
@@ -98,13 +106,3 @@ export default function useOneCall(position, units) {
 
   return oneCall;
 }
-
-// {response.data.alert === undefined ?"": {alerts: response.data.alerts.map((alert) => {
-//   return {
-//     title: alert.event,
-//     description: alert.description,
-//     start: moment.unix(alert.start).utc().format('dd HH:mm a'),
-//     end: moment.unix(alert.end).utc().format('DD  HH:mm a'),
-//     sender_name: alert.sender_name,
-//   };
-// }),}},
