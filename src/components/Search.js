@@ -1,13 +1,39 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { GiPositionMarker } from 'react-icons/gi';
+import debounce from 'lodash-es/debounce';
 
-export default function Search({
-  setSearch,
-  getLocalWeather,
-  setBrowserCoordonates,
-}) {
+export default function Search({ setSearch, setBrowserCoordonates }) {
+  const getLocalWeather = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setBrowserCoordonates({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
+          setSearch(null);
+        },
+
+        (error) => {
+          if (error.code === error.PERMISSION_DENIED) {
+            alert('User denied the request for Geolocation.');
+          }
+        },
+      );
+    } else {
+      alert('Geolocation is not supported by this browser.');
+    }
+  };
+
+  const debounceSearch = useMemo(
+    () =>
+      debounce((searchTerm) => {
+        setSearch(searchTerm);
+      }, 500),
+    [],
+  );
   const handleChange = (event) => {
-    setSearch(event.target.value.trim());
+    debounceSearch(event.target.value.trim());
     setBrowserCoordonates({});
   };
 
@@ -21,7 +47,7 @@ export default function Search({
           placeholder="Search for a new place"
           className="bg-primary w-fit m-auto placeholder:text-secondary focus:outline-none"
         />
-        <button onClick={getLocalWeather}>
+        <button onClick={() => getLocalWeather()}>
           <GiPositionMarker />
         </button>
       </div>

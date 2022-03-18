@@ -14,7 +14,8 @@ export default function BasicWeatherCard({
           {data.city}, {data.country}
         </h1>
         <h2 className="tracking-wide text-secondary">
-          {moment.unix(data.time).utc().format("dddd h:mm a")}, {data.weather_description}
+          {moment.unix(data.time).utc().format('dddd h:mm a')},{' '}
+          {data.weather_description}
         </h2>
       </div>
       <div className="my-8 flex flex-row justify-between  tracking-wide lg:my-4 ">
@@ -23,7 +24,12 @@ export default function BasicWeatherCard({
           <p>Feels like {data.feels_like}°</p>
         </div>
         <div className="text-8xl">
-          {getWeatherIcon(data.weather_id, data.time, data.sunRise, data.sunSet)}
+          {getWeatherIcon(
+            data.weather_id,
+            data.time,
+            data.sunRise,
+            data.sunSet,
+          )}
         </div>
       </div>
 

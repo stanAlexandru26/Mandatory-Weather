@@ -16,18 +16,17 @@ export default function useOneCall(position, units) {
     });
   };
 
-  const oneCall_URL = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}7&lon=${lon}&units=${units}&exclude=minutely&appid=${API_KEY}`;
+  const oneCall_URL = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${units}&exclude=minutely&appid=${API_KEY}`;
 
   const [oneCall, setOneCall] = useState({});
   useEffect(() => {
     axios.get(oneCall_URL).then((response) => {
-      console.log(response.data);
       setOneCall({
         current: {
           city: cityName,
           country: countryNameinEnglish.of(cityCountry),
           timezone: response.data.timezone,
-          time: (response.data.timezone_offset + response.data.current.dt),
+          time: response.data.timezone_offset + response.data.current.dt,
 
           temp: Math.round(response.data.current.temp),
           feels_like: Math.round(response.data.current.feels_like),
@@ -40,8 +39,9 @@ export default function useOneCall(position, units) {
             response.data.current.weather[0].description,
           ),
           weather_icon: response.data.current.weather[0].icon,
-          sunSet: (response.data.timezone_offset + response.data.current.sunset),
-          sunRise: (response.data.timezone_offset + response.data.current.sunrise),
+          sunSet: response.data.timezone_offset + response.data.current.sunset,
+          sunRise:
+            response.data.timezone_offset + response.data.current.sunrise,
         },
         hourly: response.data.hourly.map((hour) => {
           return {

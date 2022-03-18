@@ -35,7 +35,7 @@ export default function WeatherGraph({ data }) {
     <div>
       <div>
         <button
-          className=" bg-secondary hover:drop-shadow-lg rounded-xl   text-sm px-2 py-2 mb-2 "
+          className=" bg-secondary hover:drop-shadow-lg rounded-xl  text-sm px-2 py-2 mb-2 "
           onClick={handleInputChange}
         >
           {chartData === data.hourlyChartData

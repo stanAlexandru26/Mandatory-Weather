@@ -21,7 +21,6 @@ export default function useActualPosition(search, browserCoordonates) {
         lat: response.data[0].lat,
         lon: response.data[0].lon,
       });
-      console.log(position);
     });
   }, [search, browserCoordonates]);
 

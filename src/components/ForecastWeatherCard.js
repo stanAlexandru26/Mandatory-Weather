@@ -10,7 +10,12 @@ export default function ForecastWeatherCard({ data }) {
           {moment.unix(data.time).utc().format('dddd')}
         </h1>
         <div className="text-3xl basis-1/3 lg:text-5xl flex justify-center items-center  ">
-          {getWeatherIcon( data.weather_id, data.time, data.sunRise, data.sunSet)}
+          {getWeatherIcon(
+            data.weather_id,
+            data.time,
+            data.sunRise,
+            data.sunSet,
+          )}
         </div>
 
         <h1 className="  basis-1/3 flex justify-center items-center ">

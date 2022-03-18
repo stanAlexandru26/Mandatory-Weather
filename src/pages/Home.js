@@ -11,39 +11,16 @@ import ForecastWeatherCard from '../components/ForecastWeatherCard';
 export default function Home() {
   const [search, setSearch] = useState('Barcelona');
   const [browserCoordonates, setBrowserCoordonates] = useState({});
-  const [showWeatherGraph, setShowWeatherGraph] = useState(false);
-
   let truePosition = useActualPosition(search, browserCoordonates);
-
+  const [showWeatherGraph, setShowWeatherGraph] = useState(false);
+  
   const { current, chartData, daily } = useOneCall(truePosition, 'metric');
 
-  const getLocalWeather = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setBrowserCoordonates({
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          });
-          setSearch(null);
-        },
-
-        (error) => {
-          if (error.code === error.PERMISSION_DENIED) {
-            alert('User denied the request for Geolocation.');
-          }
-        },
-      );
-    } else {
-      alert('Geolocation is not supported by this browser.');
-    }
-  };
 
   return (
     <main className="mx-auto w-5/6 md:w-full lg:max-w-7xl xl:max-w-7xl 2xl:max-w-7xl ">
       <Search
         setSearch={setSearch}
-        getLocalWeather={getLocalWeather}
         setBrowserCoordonates={setBrowserCoordonates}
       />
 
