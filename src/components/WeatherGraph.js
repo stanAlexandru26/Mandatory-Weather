@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import getWeatherIcon from '../utils/getWeatherIcon';
+import moment from 'moment';
 import {
   ComposedChart,
   Area,
@@ -8,18 +10,6 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from 'recharts';
-import {
-  WiDaySunny,
-  WiCloudy,
-  WiCloud,
-  WiNightClear,
-  WiDaySunnyOvercast,
-  WiDayShowers,
-  WiDayRainWind,
-  WiDaySnow,
-  WiDayThunderstorm,
-  WiMoonAltNew,
-} from 'react-icons/wi';
 
 export default function WeatherGraph({ data }) {
   const [chartData, setChartData] = React.useState();
@@ -97,10 +87,18 @@ const CustomTooltip = ({ active, payload }) => {
     return (
       <div className="">
         <div className="bg-primary  rounded-lg p-2 flex border-2 flex-col items-center justify-center ">
-          <p className="label">{`${payload[0].payload.time}`}</p>
+          <p className="label">{`${moment
+            .unix(payload[0].payload.time)
+            .utc()
+            .format('dddd,hh a')}`}</p>
           <p className="text-xl font-bold">{`${payload[0].payload.temp}°`}</p>
           <div className="text-3xl">
-            {getWeatherIcon(payload[0].payload.weather_icon)}
+            {getWeatherIcon(
+              payload[0].payload.weather_id,
+              payload[0].payload.time,
+              payload[0].payload.sunRise,
+              payload[0].payload.sunSet,
+            )}
           </div>
           <p className="label">{`${payload[0].payload.weather_description}`}</p>
         </div>
@@ -110,38 +108,3 @@ const CustomTooltip = ({ active, payload }) => {
 
   return null;
 };
-
-function getWeatherIcon(icon) {
-  let timeOfDay = icon.slice(-1);
-  let typeOfWeather = icon.slice(0, 2);
-
-  if (timeOfDay === 'd') {
-    switch (typeOfWeather) {
-      case '01':
-        return <WiDaySunny />;
-      case '02':
-        return <WiDaySunnyOvercast />;
-      case '03':
-        return <WiCloud />;
-      case '04':
-        return <WiCloudy />;
-      case '09':
-        return <WiDayShowers />;
-      case '10':
-        return <WiDayRainWind />;
-      case '11':
-        return <WiDayThunderstorm />;
-      case '13':
-        return <WiDaySnow />;
-      case '50':
-        return <WiNightClear />;
-      default:
-        return <WiDaySunny />;
-    }
-  } else if (timeOfDay === 'n') {
-    switch (typeOfWeather) {
-      default:
-        return <WiMoonAltNew />;
-    }
-  }
-}

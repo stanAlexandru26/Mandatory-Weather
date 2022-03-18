@@ -27,10 +27,8 @@ export default function useOneCall(position, units) {
           city: cityName,
           country: countryNameinEnglish.of(cityCountry),
           timezone: response.data.timezone,
-          time: moment
-            .unix(response.data.timezone_offset + response.data.current.dt)
-            .utc()
-            .format('dddd h:mm a'),
+          time: (response.data.timezone_offset + response.data.current.dt),
+
           temp: Math.round(response.data.current.temp),
           feels_like: Math.round(response.data.current.feels_like),
           humidity: response.data.current.humidity,
@@ -42,14 +40,8 @@ export default function useOneCall(position, units) {
             response.data.current.weather[0].description,
           ),
           weather_icon: response.data.current.weather[0].icon,
-          sunSet: moment
-            .unix(response.data.current.sunset)
-            .utc()
-            .format('h:mm a'),
-          sunRise: moment
-            .unix(response.data.current.sunrise)
-            .utc()
-            .format('h:mm a'),
+          sunSet: (response.data.timezone_offset + response.data.current.sunset),
+          sunRise: (response.data.timezone_offset + response.data.current.sunrise),
         },
         hourly: response.data.hourly.map((hour) => {
           return {
@@ -74,6 +66,8 @@ export default function useOneCall(position, units) {
             weather_icon: day.weather[0].icon,
             wind_speed: day.wind_speed,
             wind_deg: day.wind_deg,
+            sunSet: day.sunset,
+            sunRise: day.sunrise,
           };
         }),
 
@@ -81,22 +75,26 @@ export default function useOneCall(position, units) {
           hourlyChartData: response.data.hourly.map((hour) => {
             return {
               xAxis: moment.unix(hour.dt).utc().format('dddd '),
-              time: moment.unix(hour.dt).utc().format('dddd, h:mm a'),
+              time: hour.dt,
               weather_description: capitalize(hour.weather[0].description),
               temp: Math.round(hour.temp),
               weather_icon: hour.weather[0].icon,
+              weather_id: hour.weather[0].id,
             };
           }),
           dailyChartData: response.data.daily.map((day) => {
             return {
               xAxis: moment.unix(day.dt).utc().format('dddd'),
-              time: moment.unix(day.dt).utc().format('dddd, h a'),
+              time: day.dt,
               temp_min: Math.round(day.temp.min),
               temp_max: Math.round(day.temp.max),
               temp: Math.round(day.temp.day),
               rainProbability: (day.pop * 100).toFixed(0),
               weather_description: capitalize(day.weather[0].description),
               weather_icon: day.weather[0].icon,
+              weather_id: day.weather[0].id,
+              sunSet: day.sunset,
+              sunRise: day.sunrise,
             };
           }),
         },
