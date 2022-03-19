@@ -6,9 +6,9 @@ export default function useActualPosition(search, browserCoordonates) {
 
   const getPositionURL = (search, browserCoordonates) => {
     if (typeof browserCoordonates === 'object' && browserCoordonates.lat > 0) {
-      return `http://api.openweathermap.org/geo/1.0/reverse?lat=${browserCoordonates.lat}&lon=${browserCoordonates.lon}&limit=1&appid=${API_KEY}`;
+      return `https://api.openweathermap.org/geo/1.0/reverse?lat=${browserCoordonates.lat}&lon=${browserCoordonates.lon}&limit=1&appid=${API_KEY}`;
     } else {
-      return `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=1&appid=${API_KEY}`;
+      return `https://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=1&appid=${API_KEY}`;
     }
   };
   const [position, setPosition] = useState({});

@@ -16,7 +16,7 @@ export default function useOneCall(position, units) {
     });
   };
 
-  const oneCall_URL = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${units}&exclude=minutely&appid=${API_KEY}`;
+  const oneCall_URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${units}&exclude=minutely&appid=${API_KEY}`;
 
   const [oneCall, setOneCall] = useState({});
 
