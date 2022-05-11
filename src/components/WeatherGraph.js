@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import getWeatherIcon from '../utils/getWeatherIcon';
 import moment from 'moment';
 import {
@@ -12,7 +12,7 @@ import {
 } from 'recharts';
 
 export default function WeatherGraph({ data }) {
-  const [chartData, setChartData] = React.useState();
+  const [chartData, setChartData] = useState();
 
   const handleInputChange = () => {
     if (chartData === data.hourlyChartData) {
@@ -35,7 +35,7 @@ export default function WeatherGraph({ data }) {
     <div>
       <div>
         <button
-          className=" bg-secondary hover:drop-shadow-lg rounded-xl  text-sm px-2 py-2 mb-2 "
+          className=" bg-secondary hover:drop-shadow-lg rounded-xl text-sm px-2 py-2 mb-2 "
           onClick={handleInputChange}
         >
           {chartData === data.hourlyChartData
@@ -86,7 +86,7 @@ const CustomTooltip = ({ active, payload }) => {
   if (active) {
     return (
       <div className="">
-        <div className="bg-primary  rounded-lg p-2 flex border-2 flex-col items-center justify-center ">
+        <div className="bg-primary rounded-lg p-2 flex border-2 flex-col items-center justify-center ">
           <p className="label">{`${moment
             .unix(payload[0].payload.time)
             .utc()

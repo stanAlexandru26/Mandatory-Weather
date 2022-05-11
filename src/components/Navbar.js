@@ -5,11 +5,11 @@ import logo from '../assets/MandatoryWeather-logos_transparent.png';
 
 export default function Navbar() {
   return (
-    <nav className="bg-primary text-primary drop-shadow-lg rounded-b-lg px-10  max-h-32 py-1 antialiased">
+    <nav className="bg-primary text-primary drop-shadow-lg rounded-b-lg px-10 max-h-32 py-1 antialiased">
       <div className="flex items-center justify-between ">
         <div className=" ">
           <Link to="/">
-            <img src={logo} alt="logo" className=" max-h-12  p-1 " />
+            <img src={logo} alt="logo" className=" max-h-12 p-1 " />
           </Link>
         </div>
         <div className="flex justify-between gap-5 ">

@@ -42,7 +42,7 @@ export default function Home() {
           )}
         </div>
         {showWeatherGraph && (
-          <div className="mx-auto mt-5 bg-primary p-2 rounded-xl drop-shadow-lg  ">
+          <div className="mx-auto mt-5 bg-primary p-2 rounded-xl drop-shadow-lg ">
             <WeatherGraph data={chartData} />
           </div>
         )}

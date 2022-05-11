@@ -18,7 +18,7 @@ export default function BasicWeatherCard({
           {data.weather_description}
         </h2>
       </div>
-      <div className="my-8 flex flex-row justify-between  tracking-wide lg:my-4 ">
+      <div className="my-8 flex flex-row justify-between tracking-wide lg:my-4 ">
         <div className="">
           <h1 className="font-bold lg:text-6xl text-5xl">{data.temp}°</h1>
           <p>Feels like {data.feels_like}°</p>
@@ -37,7 +37,7 @@ export default function BasicWeatherCard({
         <h3>Humidity: {data.humidity}%</h3>
         <h3>Wind: {data.wind_speed}m/s</h3>
         <button
-          className=" bg-secondary hover:drop-shadow-lg rounded-xl active:drop-shadow-lg text-sm px-2 py-1  "
+          className="bg-secondary hover:drop-shadow-lg rounded-xl active:drop-shadow-lg text-sm px-2 py-1 "
           onClick={() => setShowWeatherGraph(!showWeatherGraph)}
         >
           {showWeatherGraph ? 'Hide Graph' : ' Show Graph'}

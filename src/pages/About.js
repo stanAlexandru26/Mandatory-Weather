@@ -9,7 +9,7 @@ const About = () => {
           <h3 className="font-sans text-xl font-medium text-secondary">
             About Mandatory Weather
           </h3>
-          <img src={logo} alt="logo" className=" max-h-12  p-1  float-left  " />
+          <img src={logo} alt="logo" className=" max-h-12 p-1 float-left " />
           <p className="pt-4 ">
             is a weather app built on top of the{' '}
             <a
@@ -26,7 +26,7 @@ const About = () => {
           <p className="pt-4">
             It runs on{' '}
             <a
-              className="text-accent underline  "
+              className="text-accent underline "
               href="https://reactjs.org/"
               target="_blank"
               rel="noopener noreferrer"
@@ -35,7 +35,7 @@ const About = () => {
             </a>{' '}
             with{' '}
             <a
-              className="text-accent underline  "
+              className="text-accent underline "
               href="https://tailwindcss.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -44,7 +44,7 @@ const About = () => {
             </a>
             . It uses a few npm packages like{' '}
             <a
-              className="text-accent underline   "
+              className="text-accent underline "
               href="https://react-icons.github.io/react-icons/icons?name=wi"
               target="_blank"
               rel="noopener noreferrer"
@@ -53,7 +53,7 @@ const About = () => {
             </a>
             {', '}
             <a
-              className="text-accent underline   "
+              className="text-accent underline "
               href="https://axios-http.com/docs/intro"
               target="_blank"
               rel="noopener noreferrer"
@@ -62,7 +62,7 @@ const About = () => {
             </a>
             {', '}
             <a
-              className="text-accent underline   "
+              className="text-accent underline "
               href="https://momentjs.com/"
               target="_blank"
               rel="noopener noreferrer"
@@ -71,7 +71,7 @@ const About = () => {
             </a>
             {''} and{' '}
             <a
-              className="text-accent underline   "
+              className="text-accent underline "
               href="https://recharts.org/en-US/"
               target="_blank"
               rel="noopener noreferrer"
@@ -83,7 +83,7 @@ const About = () => {
           <p className="pt-4">
             Feel free to take a look at the source code on{' '}
             <a
-              className="text-accent underline   "
+              className="text-accent underline "
               href="https://github.com/stanAlexandru26/Mandatory-Weather"
               target="_blank"
               rel="noopener noreferrer"

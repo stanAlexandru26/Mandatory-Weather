@@ -38,14 +38,14 @@ export default function Search({ setSearch, setBrowserCoordonates }) {
   };
 
   return (
-    <div className="m-auto w-4/5 md:w-3/5 lg:w-1/2 bg-primary p-2 rounded-xl drop-shadow-lg flex flex-row ">
-      <div className="m-auto">
+    <div className="m-auto w-4/5 md:w-3/5 lg:w-1/2 bg-primary p-2 rounded-xl drop-shadow-lg ">
+      <div className=" flex flex-row justify-evenly px-2">
         <input
           type="text"
           onChange={(event) => handleChange(event)}
           name="search"
           placeholder="Search for a new place"
-          className="bg-primary w-fit m-auto placeholder:text-secondary focus:outline-none"
+          className="bg-primary placeholder:text-secondary focus:outline-none basis-2/3 "
         />
         <button onClick={() => getLocalWeather()}>
           <GiPositionMarker />

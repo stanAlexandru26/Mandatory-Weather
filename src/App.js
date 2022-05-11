@@ -6,7 +6,7 @@ import About from './pages/About';
 
 function App() {
   return (
-    <div className="text-primary bg-secondary flex gap-5 flex-col  min-h-screen transition duration-200 scroll-smooth antialiased ">
+    <div className="text-primary bg-secondary flex gap-5 flex-col min-h-screen transition duration-200 scroll-smooth antialiased ">
       <Navbar />
 
       <Routes>

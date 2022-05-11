@@ -13,13 +13,13 @@ export default function ToggleTheme() {
       {theme === 'dark' ? (
         <BsToggleOn
           onClick={handleClick}
-          className="cursor-pointer text-2xl   "
+          className="cursor-pointer text-2xl "
           title="light theme"
         />
       ) : (
         <BsToggleOff
           onClick={handleClick}
-          className="cursor-pointer text-2xl  "
+          className="cursor-pointer text-2xl "
           title="dark theme"
         />
       )}
